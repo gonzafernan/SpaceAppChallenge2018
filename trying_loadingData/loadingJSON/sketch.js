@@ -1,7 +1,5 @@
 var map2D;
 
-var meteor;
-
 // Malargüe 35°28′28″S 69°35′07″O
 var lat;
 var lon;
@@ -22,12 +20,13 @@ function preload(){
     // Carga de JSON asociado a los satélites
     loadSatellites();
     
-    meteor = loadJSON("https://data.nasa.gov/resource/y77d-th95.json");
+    // Carga de JSON asociado a los meteoritos
+    loadMeteorite();
 
     // Carga de JSON asociado a los incendios
     loadWildfire();
     
-    // Carga de JSON asociado a los incendios
+    // Carga de JSON asociado a los terremotos
     loadEarthquake();
 
     // ACTUAL LOCATION OF THE USER
@@ -70,19 +69,8 @@ function setup() {
     displaySatellite();
     
     // RENDER DE METEORITOS
-    /*
-    for (let i = 0; i<meteor.length; i++){
-	lon = meteor[i].geolocation.coordinates[0];
-	lat = meteor[i].geolocation.coordinates[1];
-	x = convX(lon) - Cx;
-	y = convY(lat) - Cy;
-	fill(255, 0, 0, 200);
-	//var m = meteor[i].mass;
-	//console.log(m);
-	ellipse(x, y, 10, 10);
-    }
-    */
-
+    displayMeteorite();
+    
     // RENDER DE INCENDIOS
     displayWildfire();
     
