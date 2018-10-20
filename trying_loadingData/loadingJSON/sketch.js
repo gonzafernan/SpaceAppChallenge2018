@@ -2,8 +2,6 @@ var map2D;
 
 var meteor;
 
-var eq;
-
 // Malargüe 35°28′28″S 69°35′07″O
 var lat;
 var lon;
@@ -15,8 +13,6 @@ var SIZE_IMGY = 800;
 var MAP_ZOOM = 1;
 
 var MAP_TYPE = "dark-v9";
-
-var LIM_EQ_EVENTS = 30;
 
 //var locationData;
 
@@ -31,7 +27,8 @@ function preload(){
     // Carga de JSON asociado a los incendios
     loadWildfire();
     
-    eq = loadJSON("https://eonet.sci.gsfc.nasa.gov/api/v2.1/categories/16?days=500&status=closed&limit=" + LIM_EQ_EVENTS);
+    // Carga de JSON asociado a los incendios
+    loadEarthquake();
 
     // ACTUAL LOCATION OF THE USER
     //locationData =  getCurrentPosition();
@@ -90,14 +87,7 @@ function setup() {
     displayWildfire();
     
     // RENDER DE TERREMOTOS
-    for (let i = 0; i<eq.events.length; i++){
-	lon = eq.events[i].geometries[0].coordinates[0];
-	lat = eq.events[i].geometries[0].coordinates[1];
-	x = convX(lon) - Cx;
-	y = convY(lat) - Cy;
-	fill(0, 0, 255, 200);
-	ellipse(x, y, 10, 10);
-    }
+    displayEarthquake();
 }
 
 
