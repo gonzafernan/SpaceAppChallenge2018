@@ -1,5 +1,8 @@
 var map2D;
-var sat = [0, 0, 0, 0, 0, 0, 0, 0];
+
+var meteor;
+
+var eq;
 
 // Malargüe 35°28′28″S 69°35′07″O
 var lat;
@@ -11,21 +14,27 @@ var SIZE_IMGX = 1200;
 var SIZE_IMGY = 800;
 var MAP_ZOOM = 1;
 
-var MAP_TYPE = "dark-v9"; 
+var MAP_TYPE = "dark-v9";
 
-var id = [43641, 40941, 37673, 25544, 25994, 27424, 41557, 41558];
-//var id = [43641, 40941];
+var LIM_EQ_EVENTS = 30;
+
+//var locationData;
 
 function preload(){
     map2D = loadImage("https://api.mapbox.com/styles/v1/mapbox/" + MAP_TYPE + "/static/0,0," + MAP_ZOOM + ",0,0/" + SIZE_IMGX + "x" + SIZE_IMGY + "?access_token=" + TOKEN);
-    //for (let i=0; i<id.length; i++){
-	//sat[i] = loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/" + id[i] + "/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ");
-    //}
-    for (let i=0; i<id.length; i++){
-	sat[i] = loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/" + id[i] + "/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ");
-    }
+
+    // Carga de JSON asociado a los satélites
+    loadSatellites();
     
-    //sat2 = loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/40941/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ");
+    meteor = loadJSON("https://data.nasa.gov/resource/y77d-th95.json");
+
+    // Carga de JSON asociado a los incendios
+    loadWildfire();
+    
+    eq = loadJSON("https://eonet.sci.gsfc.nasa.gov/api/v2.1/categories/16?days=500&status=closed&limit=" + LIM_EQ_EVENTS);
+
+    // ACTUAL LOCATION OF THE USER
+    //locationData =  getCurrentPosition();
 }
 
 var map1;
@@ -33,46 +42,6 @@ var map2;
 
 var C_LAT = 0;
 var C_LON = 0;
-
-function gotData0(data){
-    console.log("realUPDATE");
-    sat[0] = data;
-}
-
-function gotData1(data){
-    console.log("realUPDATE");
-    sat[1] = data;
-}
-
-function gotData2(data){
-    console.log("realUPDATE");
-    sat[2] = data;
-}
-
-function gotData3(data){
-    console.log("realUPDATE");
-    sat[3] = data;
-}
-
-function gotData4(data){
-    console.log("realUPDATE");
-    sat[4] = data;
-}
-
-function gotData5(data){
-    console.log("realUPDATE");
-    sat[5] = data;
-}
-
-function gotData6(data){
-    console.log("realUPDATE");
-    sat[6] = data;
-}
-
-function gotData7(data){
-    console.log("realUPDATE");
-    sat[7] = data;
-}
 
 var Cx;
 var Cy;
@@ -91,16 +60,46 @@ function setup() {
     map2 = new Map(x-SIZE_IMGX, y);
     map1.display();
     map2.display();
-    for (let i = 0; i<sat.length; i++){
-	lon = sat[i].positions[0].satlongitude;
-	lat = sat[i].positions[0].satlatitude;
+    // RENDER DE LA POSICIÓN ACTUAL DEL USUARIO
+    /*
+    lon = locationData.longitude;
+    lat = locationData.latitude;
+    x = convX(lon) - Cx;
+    y = convY(lat) - Cy;
+    fill(0, 255, 0, 200);
+    ellipse(x, y, 30, 30);
+    */
+    // RENDER DE SATËLITES IMPORTANTES
+    displaySatellite();
+    
+    // RENDER DE METEORITOS
+    /*
+    for (let i = 0; i<meteor.length; i++){
+	lon = meteor[i].geolocation.coordinates[0];
+	lat = meteor[i].geolocation.coordinates[1];
 	x = convX(lon) - Cx;
 	y = convY(lat) - Cy;
-	fill(255, 0, 255, 200);
-	ellipse(x, y, 20, 20);
+	fill(255, 0, 0, 200);
+	//var m = meteor[i].mass;
+	//console.log(m);
+	ellipse(x, y, 10, 10);
+    }
+    */
 
+    // RENDER DE INCENDIOS
+    displayWildfire();
+    
+    // RENDER DE TERREMOTOS
+    for (let i = 0; i<eq.events.length; i++){
+	lon = eq.events[i].geometries[0].coordinates[0];
+	lat = eq.events[i].geometries[0].coordinates[1];
+	x = convX(lon) - Cx;
+	y = convY(lat) - Cy;
+	fill(0, 0, 255, 200);
+	ellipse(x, y, 10, 10);
     }
 }
+
 
 function convX(lon){
     lon = radians(lon);
@@ -141,29 +140,7 @@ function draw() {
 	ellipse(x, y, 10, 10);
     }
     */
-    for (let i = 0; i<sat.length; i++){
-	lon = sat[i].positions[0].satlongitude;
-	lat = sat[i].positions[0].satlatitude;
-	x = convX(lon) - Cx;
-	y = convY(lat) - Cy;
-	fill(255, 0, 255, 200);
-	ellipse(x, y, 20, 20);
     }
-    
-    if (iter == 20000){
-	loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/" + id[0] + "/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ", gotData0, 'json');
-	loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/" + id[1] + "/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ", gotData1, 'json');
-	loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/" + id[2] + "/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ", gotData2, 'json');
-	loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/" + id[3] + "/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ", gotData3, 'json');
-	loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/" + id[4] + "/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ", gotData4, 'json');
-	loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/" + id[5] + "/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ", gotData5, 'json');
-	loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/" + id[6] + "/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ", gotData6, 'json');
-	loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/" + id[7] + "/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ", gotData7, 'json');
-	console.log("UPDATE");
-	iter = 0;
-    }
-    iter++;
-}
 
 function mouseDragged(){
     map1.x = mouseX;
