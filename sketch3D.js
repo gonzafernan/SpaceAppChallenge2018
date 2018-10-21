@@ -1,3 +1,4 @@
+var satModel;
 
 var img;
 var angleX;
@@ -5,12 +6,12 @@ var angleY;
 var r = 200;   // earth radium
 
 function preload(){
-  loadEarthquake();
-  loadWildfire();
-  loadMeteorite();
-  loadSatellites();
-  img = loadImage("assets/earth.jpg");
-  console.log(eq);
+    loadEarthquake();
+    loadWildfire();
+    loadMeteorite();
+    loadSatellites();
+    img = loadImage("assets/earth.jpg");
+    satModel = loadModel("satellite_obj.obj");
 }
 
 var canvas;

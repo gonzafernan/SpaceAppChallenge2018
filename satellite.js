@@ -80,9 +80,9 @@ function displaySatellite3D(){
 	var z = -h * cos(theta) * sin(phi);
 
 	push();
-	fill(255, 0, 255, 200);
+	fill(180);
 	translate(x, y, z);
-	box(5, 5, 5);
+	model(satModel);
 	pop();
 
     }
