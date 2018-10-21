@@ -33,10 +33,10 @@ This app was developed in the Mendoza local event which took place in the Univer
 * [NASA's Open Data portal](https://data.nasa.gov/)
 * [NASA's Earth Observing System](https://eospso.nasa.gov/) (EOS)
 * [Earth Observatory Natural Event Tracker](https://eonet.sci.gsfc.nasa.gov/) (EONET)
-* [NASA EARTH OBSERVATIONS](https://neo.sci.gsfc.nasa.gov/)(NEO)
+* [NASA Earth Observations](https://neo.sci.gsfc.nasa.gov/) (NEO)
 * [3D satellite model](https://free3d.com/3d-model/satellite-220624.html)
-* [SATELLITE TRACKING](https://www.n2yo.com/)
-* [WORLD MAP](https://www.mapbox.com/)
+* [Satellite tracking](https://www.n2yo.com/)
+* [World map](https://www.mapbox.com/)
 
 
 
