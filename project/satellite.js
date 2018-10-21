@@ -71,17 +71,19 @@ function displaySatellite3D(){
 	lon = sat[i].positions[0].satlongitude;
 	lat = sat[i].positions[0].satlatitude;
 
-  var theta = radians(lat);
-  var phi = radians(lon) + PI/2;
-  var x = r * cos(theta) * cos(phi);
-  var y = -r * sin(theta);
-  var z = -r * cos(theta) * sin(phi);
+	var h = r + 40;
+	
+	var theta = radians(lat);
+	var phi = radians(lon) + PI/2;
+	var x = h * cos(theta) * cos(phi);
+	var y = -h * sin(theta);
+	var z = -h * cos(theta) * sin(phi);
 
-  push();
-  fill(255, 0, 255, 200);
-  translate(x, y, z);
-  box(5, 5, 5);
-  pop();
+	push();
+	fill(255, 0, 255, 200);
+	translate(x, y, z);
+	box(5, 5, 5);
+	pop();
 
     }
 }
