@@ -11,6 +11,9 @@ function preload(){
     loadMeteorite();
     loadSatellites();
     img = loadImage("assets/earth.jpg");
+    img_sea = loadImage("assets/sea.jpg");
+    img_snow = loadImage("assets/snow.jpg");
+    img_cloud = loadImage("assets/clouds.jpg");
     satModel = loadModel("satellite_obj.obj");
 }
 
@@ -20,6 +23,9 @@ var b_fire;
 var b_satellite;
 var b_meteorite;
 var b_earthquake;
+var b_cloud;
+var b_sea;
+var b_snow;
 var b_clean;
 
 
@@ -48,12 +54,25 @@ function setup(){
     b_fire.mousePressed(mode_fire);
     flag_fire = 0;
 
+    b_cloud = select("#cloud");
+    b_cloud.mousePressed(mode_cloud);
+    flag_cloud = 0;
+
+    b_sea = select("#sea");
+    b_sea.mousePressed(mode_sea);
+    flag_sea = 0;
+
+    b_snow = select("#snow");
+    b_snow.mousePressed(mode_snow);
+    flag_snow = 0;
+
+
     b_clean = select("#clean");
     b_clean.mousePressed(mode_clean);
     flag_clean = 0;
 
     
-    canvas = createCanvas(windowWidth, windowHeight, WEBGL);
+    canvas = createCanvas(windowWidth, windowWidth, WEBGL);
     canvas.style('z-index', '-1');
     angleX = 0;
     angleY = 0;
@@ -75,7 +94,14 @@ function draw(){
   push();
       fill(col);
       translate(0,0,0);
-      texture(img);
+    texture(img);
+    if (flag_sea){
+	texture(img_sea);
+    } else if(flag_snow){
+	texture(img_snow);
+    } else if (flag_cloud){
+	texture(img_cloud);
+    }
       sphere(r);
   pop();
     if (flag_earthquake){
@@ -131,6 +157,33 @@ function mode_meteorite(){
 	flag_meteorite = 0;
     } else {
 	flag_meteorite = 1;
+    }
+}
+
+var flag_cloud;
+function mode_cloud(){
+    if (flag_cloud){
+	flag_cloud = 0;
+    } else {
+	flag_cloud = 1;
+    }
+}
+
+var flag_snow;
+function mode_snow(){
+    if (flag_snow){
+	flag_snow = 0;
+    } else {
+	flag_snow = 1;
+    }
+}
+
+var flag_sea;
+function mode_sea(){
+    if (flag_sea){
+	flag_sea = 0;
+    } else {
+	flag_sea = 1;
     }
 }
 
