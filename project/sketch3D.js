@@ -52,7 +52,7 @@ function setup(){
     flag_clean = 0;
 
     
-    canvas = createCanvas(710, 600, WEBGL);
+    canvas = createCanvas(windowWidth, windowHeight, WEBGL);
     canvas.style('z-index', '-1');
     angleX = 0;
     angleY = 0;
