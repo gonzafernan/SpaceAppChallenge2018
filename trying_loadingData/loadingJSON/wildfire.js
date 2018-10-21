@@ -12,6 +12,6 @@ function displayWildfire(){
 	x = convX(lon) - Cx;
 	y = convY(lat) - Cy;
 	fill(255, 0, 0, 200);
-	ellipse(x, y, 10, 10);
+	ellipse(x + Xg, y + Yg, 10, 10);
     }
 }

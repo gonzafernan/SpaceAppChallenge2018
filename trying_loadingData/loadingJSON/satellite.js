@@ -60,7 +60,7 @@ function displaySatellite(){
 	x = convX(lon) - Cx;
 	y = convY(lat) - Cy;
 	fill(255, 0, 255, 200);
-	ellipse(x, y, 20, 20);
+	ellipse(x + Xg, y + Yg, 20, 20);
 
     }
 }
