@@ -17,7 +17,6 @@ Space Apps Challenge 2018 was a collaboration event focused on space explotorati
 This app was developed in the Mendoza local event which took place in the Universidad Tecnológica Nacional - Facultad Regional Mendoza
 
 ## FURTHER WORK
-
 * Provide links to fundraising campaigns to help the affected victims of the disasters shown in the globe (earthquake, wildfires, etc.) While this not the main purpose of the it can become a tool to link the victims with the people willing to help. This could grow up organically into a more sophisticated global disaster-tracking app that pursues that goal.
 * Show information about all the 
 * Let the user decide which satellite wants to see or track. Calculate and visualize orbits. 
@@ -30,7 +29,6 @@ This app was developed in the Mendoza local event which took place in the Univer
 * [OpenShot](https://www.openshot.org/)
 
 ## SOURCES AND REFERENCES
-
 *[NASA Earth Data](https://earthdata.nasa.gov/)
 *[NASA's Open Data portal](https://data.nasa.gov/)
 *[NASA's Earth Observing System](https://eospso.nasa.gov/) (EOS)
