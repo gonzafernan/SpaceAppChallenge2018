@@ -21,6 +21,27 @@ function displayMeteorite(){
     }
 }
 
+function displayMeteorite3D(){
+    for (let i = 0; i<147; i++){
+	lon = meteor[i].geolocation.coordinates[0];
+	lat = meteor[i].geolocation.coordinates[1];
+
+  var theta = radians(lat);
+  var phi = radians(lon) + PI/2;
+  var x = r * cos(theta) * cos(phi);
+  var y = -r * sin(theta);
+  var z = -r * cos(theta) * sin(phi);
+
+  push();
+  fill(255);
+  translate(x, y, z);
+  box(5, 5, 5);
+  //sphere(10);
+  pop();
+    }
+}
+
+
 var x_anim = [];
 var y_anim = [];
 var offset;

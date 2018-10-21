@@ -13,8 +13,11 @@ function preload(){
   console.log(eq);
 }
 
+var canvas;
+
 function setup(){
-  createCanvas(710, 600, WEBGL);
+    canvas = createCanvas(710, 600, WEBGL);
+    canvas.style('z-index', '-1');
 }
 
 function draw(){

@@ -52,6 +52,19 @@ function gotData7(data){
     sat[7] = data;
 }
 
+function displaySatellite(){
+    // RENDER DE SATËLITES IMPORTANTES
+    for (let i = 0; i<sat.length; i++){
+	lon = sat[i].positions[0].satlongitude;
+	lat = sat[i].positions[0].satlatitude;
+	x = convX(lon) - Cx;
+	y = convY(lat) - Cy;
+	fill(255, 0, 255, 200);
+	ellipse(x + Xg, y + Yg, 20, 20);
+
+    }
+}
+
 function displaySatellite3D(){
     // RENDER DE SATËLITES IMPORTANTES
     for (let i = 0; i<sat.length; i++){
@@ -72,6 +85,7 @@ function displaySatellite3D(){
 
     }
 }
+
 
 function updateSatellites(){
     loadJSON("https://www.n2yo.com/rest/v1/satellite/positions/" + id[0] + "/0/0/0/1/&apiKey=RWA6XB-44DKXH-Q9RH5B-3WHZ", gotData0, 'json');

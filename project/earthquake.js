@@ -16,3 +16,26 @@ function displayEarthquake(){
 	ellipse(x + Xg, y + Yg, 10, 10);
     }
 }
+
+var r = 200;
+
+function displayEarthquake3D(){
+    for (let i = 0; i<eq.events.length; i++){
+    	var lon = eq.events[i].geometries[0].coordinates[0];
+    	var lat = eq.events[i].geometries[0].coordinates[1];
+
+      var theta = radians(lat);
+      var phi = radians(lon) + PI/2;
+      var x = r * cos(theta) * cos(phi);
+      var y = -r * sin(theta);
+      var z = -r * cos(theta) * sin(phi);
+
+      push();
+      fill(0, 0, 255, 200);
+      translate(x, y, z);
+      box(5, 5, 5);
+      pop();
+
+    }
+}
+
