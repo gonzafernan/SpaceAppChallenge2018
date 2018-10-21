@@ -11,7 +11,7 @@ var img_nt;
 
 var angleX;
 var angleY;
-var r = 200;   // earth radium
+var r = 400;   // earth radium
 
 function preload(){
     loadEarthquake();
@@ -112,7 +112,7 @@ function setup(){
 }
 
 function draw(){
-    
+    r = 300;
     var col = color(153, 51, 0);
     background(0);
     ambientLight(200);
