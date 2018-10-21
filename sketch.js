@@ -86,7 +86,7 @@ function setup() {
     flag_clean = 0;
     
     canvas = createCanvas(2* SIZE_IMGX, SIZE_IMGY);
-    canvas.position(0, 100);
+    canvas.position(0, 25);
     canvas.style('z-index', '-1');
     translate(width / 2, height / 2);
 //    imageMode(CENTER); Esto es de Processing, no se que hace acá
@@ -118,11 +118,6 @@ function setup() {
     
     // RENDER DE TERREMOTOS
     displayEarthquake();
-
-    ex = 50;
-    ey = 50;
-    //temp = 100;
-    //index_m = random(0, 145);
 }
 
 function Map(x, y){
@@ -133,9 +128,6 @@ function Map(x, y){
 	image(map2D_1, this.x+SIZE_IMGX, this.y);
     };
 }
-
-var ex;
-var ey;
 
 var dim3D;
 
@@ -150,20 +142,6 @@ function draw() {
     Xg = SIZE_IMGX / 2;
     Yg = SIZE_IMGY / 2;
 
-    fill(255);
-    ellipse(ex, ey, 50, 50);
-    ex = ex+1;
-    ey = ey+1;
-    /*
-    for (let i=0; i<sat.length; i++){
-	lon = sat[i].positions[0].satlongitude;
-	lat = sat[i].positions[0].satlatitude;
-	x = convX(lon) - Cx;
-	y = convY(lat) - Cy;
-	fill(255, 0, 255, 200);
-	ellipse(x, y, 10, 10);
-    }
-    */
     if (flag_satellite){
 	// RENDER DE SATËLITES IMPORTANTES
 	displaySatellite();
